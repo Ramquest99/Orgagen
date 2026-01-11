@@ -43,9 +43,9 @@ header {
     width: 100%;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    padding: 15px 0;
+    padding: 20px 0;
     z-index: 1000;
-    border-bottom: 1px solid rgba(139, 115, 85, 0.1);
+    border-bottom: none; /* remove thin line under header/logo */
 }
 
 .header-content {
@@ -61,14 +61,14 @@ header {
 }
 
 .logo-img {
-    width: 50px;
-    height: 50px;
+    width: 64px;
+    height: 64px;
     border-radius: 8px;
     object-fit: contain;
-    border: 2px solid rgba(139, 115, 85, 0.2);
-    background-color: white;
-    padding: 3px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 0; /* remove frame */
+    background-color: transparent;
+    padding: 0;
+    box-shadow: none; /* remove subtle line/shadow */
 }
 
 .logo-fallback {
@@ -80,13 +80,34 @@ header {
 .logo-fallback .logo-icon {
     background: linear-gradient(135deg, #8B7355, #D4A017);
     color: white;
-    padding: 8px;
+    padding: 0; /* remove inner padding so image fills the box */
     border-radius: 8px;
-    width: 50px;
-    height: 50px;
+    width: 64px;
+    height: 64px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden; /* clip any scaled image so borders are not visible */
+}
+
+/* Reusable icon image classes */
+.icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    border: 0;
+}
+
+.icon-img--zoom-114 {
+    transform: scale(1.14);
+    transform-origin: center;
+}
+
+.icon-img--zoom-108 {
+    transform: scale(1.08);
+    transform-origin: center;
 }
 
 .logo-text h1 {
@@ -587,13 +608,16 @@ footer {
 }
 
 .footer-section .logo-icon {
-    background: linear-gradient(135deg, #8B7355, #D4A017);
+    background: none; /* remove decorative frame */
     color: white;
-    padding: 8px;
+    padding: 0; /* remove inner padding so image can fill the box */
     border-radius: 8px;
+    width: 64px;
+    height: 64px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden; /* clip any scaled image */
 }
 
 .social-links {
