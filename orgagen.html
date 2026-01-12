@@ -8,14 +8,11 @@
     <link rel="stylesheet" href="styled.css">
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <!-- Try different paths for your logo -->
                     <img src="sastra_logo.png" alt="Orgagen Logo" class="logo-img" onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex';">
-                    <!-- Fallback logo if image doesn't load -->
                     <div id="logoFallback" class="logo-fallback" style="display: none; gap:8px;">
                         <div class="logo-icon" style="padding:0; background:none;">
                             <img src="Icons/sastraLogoAlternate.png" alt="SASTRA Logo" class="icon-img icon-img--zoom-114">
@@ -36,7 +33,6 @@
                     <a href="#domains">Domains</a>
                     <a href="#clusters">Clusters</a>
                     <a href="#projects">Projects</a>
-                    <a href="#" class="gallery-link">Gallery</a>
                     <a href="#contact">Contact</a>
                 </nav>
             </div>
@@ -103,7 +99,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section class="about" id="about">
         <div class="container">
             <div class="section-header">
@@ -142,19 +137,10 @@
                     </div>
                 </div>
                 
-                <!--<div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                         alt="Sunrise with modern irrigation systems" 
-                         style="width:100%; border-radius:12px; height:400px; object-fit:cover;">
-                    <p class="image-caption" style="text-align:center; margin-top:10px; color:var(--gray); font-style:italic; font-size:0.9rem;">
-                        
-                    </p>
-                </div>-->
-            </div>
+                </div>
         </div>
     </section>
 
-    <!-- Domains Section -->
     <section class="domains" id="domains">
         <div class="container">
             <div class="section-header">
@@ -211,7 +197,6 @@
         </div>
     </section>
 
-    <!-- Clusters Section -->
     <section class="clusters" id="clusters">
         <div class="container">
             <div class="section-header">
@@ -315,16 +300,15 @@
                     <p>Platform for external ideas and innovation pitches.</p>
                     <div class="cluster-details">
                         <p><strong>Coordinators:</strong>  SCBT - Sriram G, Deebika<br> 
-                                                           SOC - Logitha N, Gopiga<br>
-                                                           SEEE- Gayathri S, Rajeswari N<br>
-                                                           SOCE & SOME - Janani R, Shreeraam , Dharshini M.R.</p>
+                                                               SOC - Logitha N, Gopiga<br>
+                                                               SEEE- Gayathri S, Rajeswari N<br>
+                                                               SOCE & SOME - Janani R, Shreeraam , Dharshini M.R.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section class="projects" id="projects">
         <div class="container">
             <div class="section-header">
@@ -335,11 +319,28 @@
                     through engineering innovation and sustainable practices.
                 </p>
             </div>
-            <!-- Projects content will be added here later -->
+            <div class="projects-gallery" id="gallery">
+                <div class="gallery-grid">
+                    <div class="gallery-thumb" data-index="0" tabindex="0">
+                        <img src="images/field-visit.jpeg" alt="Field Visit">
+                        <h4>Field Visit Insights</h4>
+                    </div>
+                    <div class="gallery-thumb" data-index="1" tabindex="0">
+                        <img src="images/awareness-program.jpeg" alt="Awareness Program">
+                        <h4>Awareness Program</h4>
+                    </div>
+                    <div class="gallery-thumb" data-index="2" tabindex="0">
+                        <img src="images/workshop.jpeg" alt="Workshop">
+                        <h4>Workshop on Crop Nutrition</h4>
+                    </div>
+                </div>
+                <div class="gallery-cta">
+                    <button class="btn btn-primary open-gallery">Open Full Gallery</button>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
             <div class="section-header">
@@ -382,7 +383,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -431,7 +431,6 @@
         </div>
     </footer>
 
-    <!-- Gallery Overlay -->
     <div class="gallery-overlay" id="galleryOverlay">
         <div class="gallery-container">
             <button class="close-gallery">&times;</button>
@@ -456,7 +455,18 @@
         </div>
     </div>
 
-    <script>
+            <div class="event-modal" id="eventModal" aria-hidden="true">
+                <div class="event-modal-content">
+                    <button class="event-modal-close" aria-label="Close">&times;</button>
+                    <div class="event-modal-body">
+                        <h3 class="event-modal-title"></h3>
+                        <img class="event-modal-image" src="" alt="">
+                        <p class="event-modal-description"></p>
+                    </div>
+                </div>
+            </div>
+
+            <script>
         // Add interactivity for cluster cards
         document.querySelectorAll('.cluster-card').forEach(card => {
             card.addEventListener('click', () => {
@@ -464,17 +474,89 @@
             });
         });
 
-        // Gallery functionality
-        const galleryLink = document.querySelector('.gallery-link');
+        // Gallery functionality:
+        // - `Open Full Gallery` buttons still open the large overlay.
+        // - Clicking a thumbnail opens a lightweight modal with title/image/description.
+        // To add future events easily, update the `eventsData` array below.
+
+        const eventsData = [
+            { title: 'FIELD VISIT INSIGHTS AND PRACTICAL EXPOSURE', img: 'images/field-visit.jpeg', description: '' },
+            { title: 'AWARENESS PROGRAM ON TRADITIONAL VARIETIES', img: 'images/awareness-program.jpeg', description: '' },
+            { title: 'WORKSHOP ON CROP NUTRITION', img: 'images/workshop.jpeg', description: '' }
+        ];
+
+        const galleryThumbs = document.querySelectorAll('.gallery-thumb');
+        const openGalleryBtns = document.querySelectorAll('.open-gallery');
         const galleryOverlay = document.getElementById('galleryOverlay');
         const closeGallery = document.querySelector('.close-gallery');
 
-        if (galleryLink && galleryOverlay) {
-            galleryLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                galleryOverlay.style.display = 'block';
-            });
+        const modal = document.getElementById('eventModal');
+        const modalClose = modal && modal.querySelector('.event-modal-close');
+        const modalTitle = modal && modal.querySelector('.event-modal-title');
+        const modalImage = modal && modal.querySelector('.event-modal-image');
+        const modalDesc = modal && modal.querySelector('.event-modal-description');
+        const modalContent = modal && modal.querySelector('.event-modal-content');
 
+        function openModal(index) {
+            const data = eventsData[index] || {};
+            if (modalTitle) modalTitle.textContent = data.title || '';
+            if (modalImage) {
+                modalImage.src = data.img || '';
+                modalImage.alt = data.title || '';
+            }
+            if (modalDesc) modalDesc.textContent = data.description || 'Description coming soon.';
+            if (modal) {
+                // create or position an opaque blocker exactly behind the modal box
+                let blocker = document.querySelector('.modal-blocker');
+                if (!blocker) {
+                    blocker = document.createElement('div');
+                    blocker.className = 'modal-blocker';
+                    document.body.appendChild(blocker);
+                }
+                const rect = modalContent.getBoundingClientRect();
+                blocker.style.left = rect.left + 'px';
+                blocker.style.top = rect.top + 'px';
+                blocker.style.width = rect.width + 'px';
+                blocker.style.height = rect.height + 'px';
+                blocker.style.display = 'block';
+
+                modal.style.display = 'flex';
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('modal-open');
+            }
+        }
+
+        function closeModal() {
+            if (modal) {
+                modal.style.display = 'none';
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('modal-open');
+                const blocker = document.querySelector('.modal-blocker');
+                if (blocker) blocker.style.display = 'none';
+            }
+        }
+
+        galleryThumbs.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                const idx = parseInt(thumb.dataset.index, 10);
+                openModal(idx);
+            });
+            thumb.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    const idx = parseInt(thumb.dataset.index, 10);
+                    openModal(idx);
+                }
+            });
+        });
+
+        // Keep full gallery overlay behavior on the Open Full Gallery button
+        openGalleryBtns.forEach(btn => btn.addEventListener('click', () => {
+            if (!galleryOverlay) return;
+            galleryOverlay.style.display = 'block';
+            galleryOverlay.scrollTop = 0;
+        }));
+
+        if (closeGallery && galleryOverlay) {
             closeGallery.addEventListener('click', () => {
                 galleryOverlay.style.display = 'none';
             });
@@ -486,10 +568,15 @@
                 }
             });
         }
+
+        // Modal close behavior (click outside to close as well)
+        if (modalClose) modalClose.addEventListener('click', closeModal);
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+        }
     </script>
 </body>
 
 </html>
-
-
-

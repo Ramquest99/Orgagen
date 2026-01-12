@@ -1,5 +1,3 @@
-[file name]: styled.css
-[file content begin]
 /* Earthy brown and yellow theme - DIRECT COLORS */
 :root {
     --primary: #8B7355;       /* Brown */
@@ -33,7 +31,7 @@ body {
 }
 
 section {
-    padding: 80px 0;
+    padding: 40px 0;
 }
 
 /* Header */
@@ -174,7 +172,7 @@ nav a:hover::after {
 .hero-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 30px;
     align-items: center;
 }
 
@@ -281,7 +279,7 @@ nav a:hover::after {
 /* Section Header */
 .section-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
 
 .section-badge {
@@ -317,7 +315,7 @@ nav a:hover::after {
 .about-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 30px;
     align-items: start;
 }
 
@@ -502,6 +500,54 @@ nav a:hover::after {
     background: #FAF7F0; /* Light cream */
 }
 
+/* Inline Projects Gallery */
+.projects-gallery {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0 8px;
+}
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: stretch;
+}
+.gallery-thumb {
+    background: var(--bg-light);
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(139,115,85,0.06);
+    border: 1px solid rgba(139,115,85,0.06);
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.gallery-thumb img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.gallery-thumb h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--dark);
+}
+.gallery-cta {
+    text-align: center;
+    margin-top: 18px;
+}
+
+/* Improve overlay image presentation */
+.gallery-event img {
+    width: 100%;
+    max-height: 520px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
 /* Contact Section */
 .contact {
     background: #FAF7F0; /* Light cream */
@@ -666,28 +712,110 @@ footer {
     padding: 20px;
 }
 
+/* Event modal for thumbnail details */
+.event-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: transparent; /* allow page outside modal to remain visible */
+    z-index: 2500;
+    padding: 20px;
+}
+.event-modal-content {
+    background: var(--light-gray);
+    border-radius: 12px;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    position: relative;
+}
+.event-modal-close {
+    position: absolute;
+    right: 14px;
+    top: 10px;
+    border: none;
+    background: none;
+    font-size: 2rem;
+    color: var(--gray);
+    cursor: pointer;
+}
+.event-modal-body {
+    padding: 24px;
+    text-align: center;
+}
+.event-modal-title {
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+.event-modal-image {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+.event-modal-description {
+    color: var(--gray);
+    line-height: 1.6;
+}
+
+/* When a modal is open, dim/hide non-text elements but keep text readable.
+   - Images, cards, nav, footer, and other heavy visuals are made opaque (hidden).
+   - Headings and paragraphs remain fully visible so the modal text is clear.
+*/
+.event-modal-content {
+    background: var(--white);
+    color: var(--dark);
+    position: relative;
+    overflow: hidden; /* ensure background covers rounded corners */
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+/* Ensure the modal box itself is fully opaque and covers anything directly behind it, including rounded corners */
+.event-modal-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--white);
+    border-radius: inherit;
+    z-index: 0;
+}
+.event-modal-body { position: relative; z-index: 1; }
+
+/* Fixed blocker placed directly behind modal box to hide page content only under the popup */
+.modal-blocker {
+    position: fixed;
+    background: var(--white);
+    z-index: 2499; /* just below modal (2500) */
+    border-radius: 12px;
+    box-shadow: none;
+    display: none;
+}
+
 .gallery-container {
-    background: white;
+    background: var(--light-gray);
     border-radius: 12px;
     padding: 40px;
     max-width: 1200px;
     width: 95%;
     margin: 40px auto;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
 }
 
 .gallery-container h2 {
     color: #8B7355; /* Brown */
     text-align: center;
-    margin-bottom: 30px;
-    font-size: 2rem;
+    margin-bottom: 20px;
+    font-size: 1.9rem;
 }
 
 .gallery-content {
     display: flex;
     flex-direction: column;
-    gap: 60px;
-    margin-top: 30px;
+    gap: 30px;
+    margin-top: 20px;
 }
 
 .gallery-event {
@@ -703,8 +831,8 @@ footer {
 
 .gallery-event img {
     width: 100%;
-    max-height: 500px;
-    object-fit: contain;
+    max-height: 520px;
+    object-fit: cover;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(139, 115, 85, 0.2);
     margin-bottom: 10px;
@@ -741,16 +869,24 @@ footer {
 /* Responsive Design */
 @media (max-width: 1024px) {
     .hero-content {
-        gap: 40px;
+        gap: 30px;
     }
     
     .about-content {
-        gap: 40px;
+        gap: 30px;
     }
     
     .footer-content {
         grid-template-columns: 1fr 1fr;
         gap: 30px;
+    }
+
+    /* Gallery responsiveness for tablets */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .gallery-thumb img {
+        height: 200px;
     }
 }
 
@@ -758,7 +894,7 @@ footer {
     .hero-content,
     .about-content {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 30px;
     }
     
     .footer-content {
@@ -797,6 +933,13 @@ footer {
     .feature-cards {
         margin-top: 20px;
     }
+    /* Gallery responsiveness for mobile */
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    .gallery-thumb img {
+        height: 180px;
+    }
     
     nav {
         display: none;
@@ -811,7 +954,7 @@ footer {
     }
     
     .gallery-content {
-        gap: 40px;
+        gap: 30px;
     }
     
     .gallery-event h3 {
@@ -845,7 +988,7 @@ footer {
     }
     
     section {
-        padding: 60px 0;
+        padding: 30px 0;
     }
     
     .hero {
@@ -867,4 +1010,3 @@ footer {
         font-size: 2rem;
     }
 }
-[file content end]
