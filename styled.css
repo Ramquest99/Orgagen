@@ -740,6 +740,7 @@ footer {
     font-size: 2rem;
     color: var(--gray);
     cursor: pointer;
+    z-index: 2; /* ensure close button is above modal pseudo-elements and any backdrop blocker */
 }
 .event-modal-body {
     padding: 24px;
@@ -792,6 +793,8 @@ footer {
     border-radius: 12px;
     box-shadow: none;
     display: none;
+    /* allow clicks to pass through to modal controls above this blocker */
+    pointer-events: none;
 }
 
 .gallery-container {
