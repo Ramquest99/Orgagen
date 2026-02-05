@@ -1013,3 +1013,37 @@ footer {
         font-size: 2rem;
     }
 }
+
+/* Gallery Grid Layout for Collection */
+.gallery-thumb-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+    height: 220px;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.gallery-grid-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Modal Grid Layout */
+.event-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+    display: none; /* Hidden by default */
+}
+
+.event-modal-grid img {
+    width: 100%;
+    height: 200px; /* Fixed height for modal grid items */
+    object-fit: cover;
+    border-radius: 8px;
+}
