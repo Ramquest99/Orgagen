@@ -843,7 +843,10 @@ footer {
     background: var(--white);
     color: var(--dark);
     position: relative;
-    overflow: hidden;
+    /* allow internal scrolling when modal content exceeds viewport height */
+    overflow: auto;
+    /* keep modal within viewport with small margin */
+    max-height: calc(100vh - 40px);
     /* ensure background covers rounded corners */
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
@@ -1091,6 +1094,18 @@ footer {
 
     .gallery-event img {
         max-height: 300px;
+    }
+
+    /* Make modal fit and scroll on small screens */
+    .event-modal-content {
+        max-height: calc(100vh - 24px);
+        overflow-y: auto;
+        margin: 0 8px;
+        border-radius: 10px;
+    }
+
+    .event-modal-image {
+        max-height: 220px;
     }
 
     .gallery-event h3 {
