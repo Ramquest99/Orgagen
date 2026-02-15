@@ -413,6 +413,18 @@
                         <img src="images/Natural_Fungicide.png" alt="Adenium and Butterfly pea Planting Drive">
                         <h4>Adenium and Butterfly pea Planting Drive (21.01.2026)</h4>
                     </div>
+                        <div class="gallery-thumb" data-index="6" tabindex="0">
+                            <div class="gallery-thumb-grid">
+                                <img src="images/census1.jpeg" class="gallery-grid-image" alt="Census 1">
+                                <img src="images/census2.jpeg" class="gallery-grid-image" alt="Census 2">
+                                <img src="images/census3.jpeg" class="gallery-grid-image" alt="Census 3">
+                                <img src="images/census4.jpeg" class="gallery-grid-image" alt="Census 4">
+                            </div>
+                            <h4>Interview with Farmers on Real time Agricultural challenges(04.02.2026)</h4>
+                        </div>
+                </div>
+                <div class="gallery-cta">
+                    <button id="toggleEventsBtn" class="btn btn-primary" style="display:none">More Events</button>
                 </div>
             </div>
     </section>
@@ -530,6 +542,8 @@
                     <img src="" alt="" class="modal-grid-img-2">
                     <img src="" alt="" class="modal-grid-img-3">
                     <img src="" alt="" class="modal-grid-img-4">
+                    <img src="" alt="" class="modal-grid-img-5">
+                    <img src="" alt="" class="modal-grid-img-6">
                 </div>
                 <p class="event-modal-description"></p>
             </div>
@@ -579,7 +593,13 @@
                 images: ['images/field-visit.jpeg', 'images/field_visit_2.jpg', 'images/field_visit_3.jpg', 'images/field_visit_4.jpg'],
                 description: 'On October 16, 2025, a follow-up paddy field visit was organized for the B.Tech and M.tech (across all disciplines) student members of ORGAGEN students club @ SASTRA to personally observe the growth and establishment of the transplanted paddy crop at Paddy fields of SASTRA. Members were briefed on post-transplantation agronomic practices, comparative aspects of manual versus mechanized transplantation, and the essential prerequisites and field preparations required before initiating paddy cultivation.'
             },
-            { title: 'ADENIUM AND BUTTERFLY PEA PLANTING DRIVE (21.01.2026)', img: 'images/Natural_Fungicide.png', description: 'On 21.01.2026, Orgagen conducted a hands-on workshop on Seed Sowing and Natural Fungicide Treatment, with the guidance of Prof. Dr. A. Sathya to introduce students to eco-friendly seed treatment and plant growth analysis. Adenium (Desert Rose) and Butterfly Pea (Clitoria ternatea) seeds were treated using baking soda, neem-based, and cinnamon–clove fungicidal preparations and were sown with labelling for observation. Participants also visited the herbal garden and learned about the medicinal importance of plants with hands on observation. Students from various disciplines including Biotechnology, Computer Science, and Mechanical Engineering actively participated.The workshop effectively combined practical learning, environmental awareness, and sustainable agricultural practices.' }
+            { title: 'ADENIUM AND BUTTERFLY PEA PLANTING DRIVE (21.01.2026)', img: 'images/Natural_Fungicide.png', description: 'On 21.01.2026, Orgagen conducted a hands-on workshop on Seed Sowing and Natural Fungicide Treatment, with the guidance of Prof. Dr. A. Sathya to introduce students to eco-friendly seed treatment and plant growth analysis. Adenium (Desert Rose) and Butterfly Pea (Clitoria ternatea) seeds were treated using baking soda, neem-based, and cinnamon–clove fungicidal preparations and were sown with labelling for observation. Participants also visited the herbal garden and learned about the medicinal importance of plants with hands on observation. Students from various disciplines including Biotechnology, Computer Science, and Mechanical Engineering actively participated.The workshop effectively combined practical learning, environmental awareness, and sustainable agricultural practices.' },
+            {
+                title: 'Interview with Farmers on Real time Agricultural challenges(04.02.2026)',
+                img: 'images/census1.jpg',
+                images: ['images/census1.jpeg','images/census2.jpeg','images/census3.jpeg','images/census4.jpeg','images/census5.jpeg','images/census6.jpeg'],
+                description: 'As part of our field study conducted in Kurumpoondi and Vallam on February 4, a structured sensus was carried out by participating students to understand the real-time challenges faced by farmers. The questionnaire was designed to gather comprehensive insights into agricultural practices, resource usage, and economic conditions.\n\nThe key areas covered during the interaction include:\nCrop Details: Information on the types of crops cultivated by farmers in the current season.\nFarming Practices: Usage of organic and inorganic manures and the preference for sustainable or conventional farming methods.\nSoil, Water, and Climate Challenges: Identification of issues related to soil fertility, water availability, and changing climatic conditions affecting crop productivity.\nEconomic Analysis: Assessment of profit and loss in farming, including input costs and returns.\nGovernment Schemes: Awareness and accessibility of government schemes and support programs for farmers.\nTechniques and Technology: Methods and techniques adopted in farming, including modern or traditional approaches.\nFertilizers and Pesticides Usage: Types and frequency of fertilizers and pesticides used, along with their impact.\n\nThis structured approach helped in gaining a holistic understanding of the agricultural ecosystem and identifying key problem areas to propose innovative solutions.'
+            }
         ];
 
         const galleryThumbs = document.querySelectorAll('.gallery-thumb');
@@ -681,6 +701,42 @@
                 if (e.target === modal) closeModal();
             });
         }
+
+        // Show only first N events with a toggle for more/less
+        const MAX_VISIBLE_EVENTS = 9;
+        const toggleBtn = document.getElementById('toggleEventsBtn');
+        let eventsExpanded = false;
+
+        function updateEventVisibility() {
+            const thumbs = Array.from(document.querySelectorAll('.gallery-thumb'));
+            if (thumbs.length > MAX_VISIBLE_EVENTS) {
+                // show toggle
+                toggleBtn.style.display = 'inline-block';
+                toggleBtn.textContent = eventsExpanded ? 'Less Events' : 'More Events';
+
+                thumbs.forEach((t, i) => {
+                    if (!eventsExpanded && i >= MAX_VISIBLE_EVENTS) {
+                        t.classList.add('hidden-event');
+                    } else {
+                        t.classList.remove('hidden-event');
+                    }
+                });
+            } else {
+                // no toggle needed
+                if (toggleBtn) toggleBtn.style.display = 'none';
+                thumbs.forEach(t => t.classList.remove('hidden-event'));
+            }
+        }
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                eventsExpanded = !eventsExpanded;
+                updateEventVisibility();
+            });
+        }
+
+        // Initialize visibility on load
+        updateEventVisibility();
     </script>
 </body>
 

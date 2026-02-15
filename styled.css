@@ -594,6 +594,11 @@ nav a:hover::after {
     margin-top: 18px;
 }
 
+/* Hide events beyond the visible limit */
+.hidden-event {
+    display: none !important;
+}
+
 /* Improve overlay image presentation */
 .gallery-event img {
     width: 100%;
@@ -1140,7 +1145,7 @@ footer {
 /* Modal Grid Layout */
 .event-modal-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     margin-bottom: 12px;
     display: none;
@@ -1149,8 +1154,8 @@ footer {
 
 .event-modal-grid img {
     width: 100%;
-    height: 200px;
-    /* Fixed height for modal grid items */
+    height: 140px;
+    /* Fixed height for modal grid items (3x2 layout) */
     object-fit: cover;
     border-radius: 8px;
 }
