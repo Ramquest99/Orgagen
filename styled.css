@@ -1142,20 +1142,57 @@ footer {
     object-fit: cover;
 }
 
-/* Modal Grid Layout */
+/* Modal Grid Layout
+   - Default layout is 2 columns (2x2) so events with 4 images appear as 2+2.
+   - Add `.event-modal-grid--6` for a 3x2 layout (six-image events).
+   - Containers remain hidden by default; show them by toggling `display` (e.g. via JS).
+*/
 .event-modal-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
     margin-bottom: 12px;
-    display: none;
-    /* Hidden by default */
+    display: none; /* Hidden by default; toggle to show when needed */
+    gap: 10px;
+    /* Default: 2 columns so images appear as 2-per-row (good for 4 or 6 images)
+       - For 4 images this becomes 2x2
+       - For 6 images this becomes 2 columns x 3 rows (2 per row)
+    */
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
+}
+
+/* Single-image layout: full-width single column and natural height */
+.event-modal-grid--single {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    gap: 12px;
+}
+
+/* Explicit 2-column modifier (optional) */
+.event-modal-grid--2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
 }
 
 .event-modal-grid img {
     width: 100%;
-    height: 140px;
-    /* Fixed height for modal grid items (3x2 layout) */
+    height: 100%;
     object-fit: cover;
     border-radius: 8px;
+}
+
+/* For single-image containers, let the image size naturally but cap height */
+.event-modal-grid--single img {
+    height: auto;
+    max-height: 520px;
+    object-fit: cover;
+}
+
+/* Responsive: on small screens stack to single column */
+@media (max-width: 768px) {
+    .event-modal-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        gap: 12px;
+    }
 }
